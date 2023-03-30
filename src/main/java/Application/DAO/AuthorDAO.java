@@ -1,11 +1,14 @@
 package Application.DAO;
 
 import Application.Model.Author;
+import Application.Model.Book;
 import Application.Util.ConnectionUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.core.sym.Name;
 
 /**
  * A DAO is a class that mediates the transformation of data between the format of objects in Java to rows in a
@@ -28,7 +31,7 @@ public class AuthorDAO {
         List<Author> authors = new ArrayList<>();
         try {
             //Write SQL logic here
-            String sql = "change me";
+            String sql = "select * from author";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -52,11 +55,12 @@ public class AuthorDAO {
         try {
 //          Write SQL logic here. You should only be inserting with the name column, so that the database may
 //          automatically generate a primary key.
-            String sql = "change me" ;
+            String sql ="INSERT INTO author (id, name) VALUES (?,?);" ;
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             //write preparedStatement's setString method here.
-            
+            preparedStatement.setString(2, author.getName());
+            preparedStatement.setInt(1, author.getId());
             preparedStatement.executeUpdate();
             ResultSet pkeyResultSet = preparedStatement.getGeneratedKeys();
             if(pkeyResultSet.next()){

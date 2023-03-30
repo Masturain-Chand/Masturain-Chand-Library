@@ -8,7 +8,7 @@ public class Book {
     int isbn;
     int author_id;
     String title;
-    int copies_available;
+    static int copies_available;
 
     /**
      * A default, no-args constructor is REQUIRED for Jackson ObjectMapper to work.
@@ -91,4 +91,11 @@ public class Book {
                 ", copies_available=" + copies_available +
                 '}';
     }
-}
+
+    public String getBook(){
+        return null;
+    }
+    public Book getBookByIsbn(){
+        return null;
+    }
+    }
